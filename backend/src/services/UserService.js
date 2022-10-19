@@ -9,7 +9,6 @@ class UserService {
     const saltRounds = 10;
 
     user.password = await bcrypt.hash(user.password, saltRounds);
-
     await User.create(user);
   }
 
