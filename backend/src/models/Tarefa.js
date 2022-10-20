@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const { DataTypes } = require('sequelize');
 const database = require('../database/index');
 
 const User = require('./User');
@@ -6,37 +6,42 @@ const User = require('./User');
 
 const Tarefa = database.define('Tarefa', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     allowNull: false,
   },
 
   name: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 
   deadline: {
-    type: Sequelize.DATE,
+    type: DataTypes.DATE,
     allowNull: false,
   },
 
   subject: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 
   value: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   activity: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: true,
   }
 });
 
+Tarefa.sync({alter: true, force: false})
+  .then(() => {
+    console.log('Tarefa table was (re)created');
+  })
+  .catch((err) => console.log(err));
 
 module.exports = Tarefa;

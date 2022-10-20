@@ -47,6 +47,7 @@ app.use(express.json());
 const usersRouter = require('../controller/user-controller');
 app.use('/users', usersRouter); // Definição de Router de usuários
 
-
+const tarefaRouter = require('../controller/tarefa-controller');
+app.use('/tarefa', tarefaRouter);
 
 module.exports = app;

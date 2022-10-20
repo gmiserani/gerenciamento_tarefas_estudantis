@@ -94,7 +94,7 @@ router.get('/getTarefaInfo/:tarefaId',
   verifyJWT,
   async (req, res, next) => {
     try {
-      const tarefa = await TarefaService.getTarefaById(req.params.tarefaId); // object
+      const tarefa = await TarefaService.getTarefasById(req.params.tarefaId); // object
       const info = tarefa //ANTES ERA UMA LISTA
 
       res.status(200).json(info);

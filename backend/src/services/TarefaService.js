@@ -3,9 +3,9 @@ const PermissionError = require('../errors/PermissionError');
 const QueryError = require('../errors/QueryError');
 
 class tarefaService {
-    async createTarefa(tarefa, body) { // response
+    async createTarefa(tarefa) { // response
       await Tarefa.create(tarefa)
-      .then(result => body.tarefaId = result.id);
+      //.then(result => body.tarefaId = result.id);
     }
 
     async deleteTarefa(id) {
@@ -48,7 +48,7 @@ class tarefaService {
         throw new QueryError(`Nao foi encontrado um projeto com o ID: ${id}`);
       }
       
-      body.name = body.tarefaName;
+      body.name = body.name;
       await tarefa.update(body);
     }
 
@@ -64,13 +64,24 @@ class tarefaService {
       return tarefa;
     }
 
-    async getTarefaMateria(materia) {
+    async getTarefaMateria(subject) {
       const tarefa = await Tarefa.findAll({
-        where: { materia: materia },
+        where: { subject: subject },
       });
 
       if (!tarefa) {
-        throw new QueryError(`Nao foi encontrado um projeto com o nome: ${name}`);
+        throw new QueryError(`Nao foi encontrada essa materia: ${subject}`);
+      }
+
+      return tarefa;
+    }
+    async getTarefadate(deadline) {
+      const tarefa = await Tarefa.findAll({
+        where: { deadline: deadline },
+      });
+
+      if (!tarefa) {
+        throw new QueryError(`Nao foi encontrado um projeto com essa data: ${data}`);
       }
 
       return tarefa;
