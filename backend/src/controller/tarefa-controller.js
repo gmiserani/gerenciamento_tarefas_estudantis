@@ -58,12 +58,12 @@ router.get('/getTarefa/:id',
     }
 });
 
-router.get('/getTarefadate',
-    objectFilter('body', ['deadline']),
+router.get('/getTarefadate/:deadline',
+    //objectFilter('body', ['deadline']),
     verifyJWT,
   async (req, res, next) => {
     try {
-      const tarefadate = req.body.deadline;
+      const tarefadate = req.params.deadline;
       const tarefa = await TarefaService.getTarefadate(tarefadate);
 
       res.status(200).json(tarefa);
@@ -72,12 +72,12 @@ router.get('/getTarefadate',
     }
 });
 
-router.get('/getTarefaMateria',
-    objectFilter('body', ['subject']),
+router.get('/getTarefaMateria/:subject',
+    //objectFilter('body', ['subject']),
     verifyJWT,
   async (req, res, next) => {
     try {
-      const tarefamat = req.body.subject;
+      const tarefamat = req.params.subject;
       const tarefa = await TarefaService.getTarefaMateria(tarefamat);
 
       res.status(200).json(tarefa);

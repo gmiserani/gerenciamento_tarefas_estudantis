@@ -1,6 +1,7 @@
 const Tarefa = require('../models/Tarefa');
 const PermissionError = require('../errors/PermissionError');
 const QueryError = require('../errors/QueryError');
+const { Op } = require('sequelize');
 
 class tarefaService {
     async createTarefa(tarefa) { // response
@@ -75,10 +76,14 @@ class tarefaService {
 
       return tarefa;
     }
-    async getTarefadate(deadline) {
+    async getTarefadate(deadline1) {
+      const deadline = new Date(deadline1).toDateString()
       const tarefa = await Tarefa.findAll({
-        where: { deadline: deadline },
+        where: { deadline: {[Op.lt]:deadline} },
       });
+
+      console.log(deadline)
+      console.log(tarefa)
 
       if (!tarefa) {
         throw new QueryError(`Nao foi encontrado um projeto com essa data: ${data}`);
