@@ -12,6 +12,9 @@ import MailIcon from '@mui/icons-material/Mail';
 import CallIcon from '@mui/icons-material/Call'
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import BookIcon from '@mui/icons-material/Book';
+import InterestsIcon from '@mui/icons-material/Interests';
+import SchoolIcon from '@mui/icons-material/School';
 
 import {
     DataContainer,
@@ -89,13 +92,18 @@ export default function Perfil() {
                   <Value> oi </Value>
                 </DataAlign>
                 <DataAlign>
-                  <CallIcon />
-                  <Label> Celular: </Label>
+                  <InterestsIcon />
+                  <Label> Interesses/Hobbies: </Label>
                   <Value> oi </Value>
                 </DataAlign>
                 <DataAlign>
-                  <DateRangeIcon />
-                  <Label> Data de nascimento: </Label>
+                  <SchoolIcon />
+                  <Label> Período: </Label>
+                  <Value> oi </Value>
+                </DataAlign>
+                <DataAlign>
+                  <BookIcon />
+                  <Label> Matérias: </Label>
                   <Value> oi </Value>
                 </DataAlign>
               </DataContainer>
