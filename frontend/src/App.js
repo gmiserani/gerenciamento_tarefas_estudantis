@@ -6,6 +6,7 @@ import SignIn from "./pages/Login/Login";
 import SignUp from "./pages/Cadastro/Cadastro";
 import Perfil from "./pages/Perfil/Perfil"
 import Listagem from "./pages/ListagemTarefas/ListagemTarefas"
+import Tarefa from "./pages/NovaTarefa/Tarefa"
 
 //import { AuthProvider } from "../services/AuthContext";
 //import { ThemeProvider } from '@mui/material/styles';
@@ -20,6 +21,7 @@ function App() {
               <Route path="/cadastro" element={<SignUp />} />
               <Route path="/perfil" element={<Perfil />} />
               <Route path="/listagem" element={<Listagem />} />
+              <Route path="/novatarefa" element={<Tarefa />} />
             </Routes>
     </div>
   );
