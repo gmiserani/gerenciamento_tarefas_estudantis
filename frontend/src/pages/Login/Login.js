@@ -10,6 +10,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { LoginSubmit } from '../../services/usercrud';
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -26,15 +29,19 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  function SignIn (props) {
+    const navigate = useNavigate();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        LoginSubmit(email,password)
+        .then((res) => navigate("/dashboard/"))
+        .catch((err) => alert(err))
+        // navigate("/dashboard")
+    }
 
   return (
     <ThemeProvider theme={theme}>
@@ -56,24 +63,24 @@ export default function SignIn() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Endereço de Email"
-              name="email"
-              autoComplete="email"
-              autoFocus
+               margin="normal"
+               required
+               fullWidth
+               className="input"
+               type="email"
+               placeholder="Email"
+               value={email}
+               onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Senha"
+              className="input last"
               type="password"
-              id="password"
-              autoComplete="current-password"
+              placeholder="Senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Button
               type="submit"
@@ -98,3 +105,5 @@ export default function SignIn() {
     </ThemeProvider>
   );
 }
+
+export default SignIn;
