@@ -37,9 +37,10 @@ const theme = createTheme();
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        console.log({email, password})
         LoginSubmit(email,password)
-        .then((res) => navigate("/dashboard/"))
-        .catch((err) => alert(err))
+        .then((res) => navigate("/perfil/"))
+        .catch((err) => alert(err.response))
         // navigate("/dashboard")
     }
 
@@ -87,6 +88,7 @@ const theme = createTheme();
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleSubmit}
             >
               Entrar
             </Button>
