@@ -16,6 +16,12 @@ import BookIcon from '@mui/icons-material/Book';
 import InterestsIcon from '@mui/icons-material/Interests';
 import SchoolIcon from '@mui/icons-material/School';
 import { LogoutSubmit } from '../../services/usercrud';
+import { getUser } from '../../services/usercrud';
+import {
+  forgetUser
+} from '../../services/auth';
+import { useNavigate, useParams } from 'react-router-dom';
+import { AuthContext, User } from '../../services/AuthContext';
 
 
 import {
@@ -31,16 +37,40 @@ import {
 const theme = createTheme();
 
 export default function Perfil() {
+
+  const { id } = useParams();
+  const { user } = React.useContext(AuthContext);
+  const [isMyself,setIsMyself] = React.useState(true);
+
+  const [userData, setUserData] = React.useState(true)
+
   const navigate = useNavigate();
+  const [x, setUser] = React.useState(undefined);
+  const fetch = async () => {
+    let userData=undefined;
+    if (user.id === Number(id)) {
+      userData = await getUser(Number(id),true);
+      setIsMyself(true);
+    } else {
+      setIsMyself(false);
+      userData = await getUser(Number(id));
+    }
+    if (!userData) {
+      throw new Error("Nao foi possivel pegar dados antigos do usuario");
+    }
+    setUserData(userData);
+    } 
+  fetch();
+  console.log(userData)
+
   const handleLogout = (jwtIsSet = true) => {
       if (jwtIsSet)
         LogoutSubmit()
-
       setUser(undefined);
-      forgetUser();
-      navigate("/");
-
-    } 
+      forgetUser()
+      navigate("/")
+      .catch((err) => alert(err.response))
+  }
 
 
   return (
@@ -110,6 +140,15 @@ export default function Perfil() {
                 </DataAlign>
               </DataContainer>
               </Divider>
+              <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={() => handleLogout(true)}
+            >
+              Logout
+            </Button>
           </Paper>
         </Box>
       </Container>

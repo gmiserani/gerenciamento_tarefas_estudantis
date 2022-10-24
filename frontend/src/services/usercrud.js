@@ -58,4 +58,19 @@ async function EditUser(id,nome,email){
 
 }
 
-export { getAllUsers, LoginSubmit, DeleteUser, EditUser, SignUpSubmit}
+async function getUser(id, myself){
+    const res = (myself ? await api.get(`users/myAccount`) : await api.get(`/users/getUser/${id}`) );
+    const user = {
+      id: Number(res.data.id),
+      name: res.data.name,
+      email: res.data.email,
+      password: res.data.password,
+      interesses: res.data.interesses,
+      periodo: Number(res.data.periodo),
+      materias: res.data.materias,
+    }
+    return user;
+  } 
+
+
+export { getAllUsers, LoginSubmit, DeleteUser, EditUser, SignUpSubmit, getUser, LogoutSubmit}
