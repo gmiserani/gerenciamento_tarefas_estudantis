@@ -44,7 +44,7 @@ async function loginMiddleware(req, res, next) {
 
     generateJWT(user, res);
 
-    res.status(204).end();
+    res.status(200).end();
   } catch (error) {
     next(error);
   }

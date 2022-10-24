@@ -15,14 +15,14 @@ import Tarefa from "./pages/NovaTarefa/Tarefa"
 function App() {
   return (
     <div className="App">
-            <Routes>
-              {/*//? Public Routes */}
-              <Route path="/" element={<SignIn />} />
-              <Route path="/cadastro" element={<SignUp />} />
-              <Route path="/perfil" element={<Perfil />} />
-              <Route path="/listagem" element={<Listagem />} />
-              <Route path="/novatarefa" element={<Tarefa />} />
-            </Routes>
+      <Routes>
+        {/*//? Public Routes */}
+        <Route path="/" element={<SignIn />} />
+        <Route path="/cadastro" element={<SignUp />} />
+        <Route path="/perfil" element={<Perfil />} />
+        <Route path="/listagem" element={<Listagem />} />
+        <Route path="/novatarefa" element={<Tarefa />} />
+      </Routes>
     </div>
   );
 }

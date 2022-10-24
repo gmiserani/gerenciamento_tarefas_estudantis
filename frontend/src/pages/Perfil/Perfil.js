@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -15,7 +15,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BookIcon from '@mui/icons-material/Book';
 import InterestsIcon from '@mui/icons-material/Interests';
 import SchoolIcon from '@mui/icons-material/School';
-import { LogoutSubmit } from '../../services/usercrud';
+import { LoginID, LogoutSubmit } from '../../services/usercrud';
 import { getUser } from '../../services/usercrud';
 import {
   forgetUser
@@ -25,50 +25,41 @@ import { AuthContext, User } from '../../services/AuthContext';
 
 
 import {
-    DataContainer,
-    DataAlign,
-    Value,
-    Label,
-    Divider,
-    PictureNameContainer,
-    UserNameText,
-  } from "./Styles"
+  DataContainer,
+  DataAlign,
+  Value,
+  Label,
+  Divider,
+  PictureNameContainer,
+  UserNameText,
+} from "./Styles"
+import { useEffect } from 'react';
 
 const theme = createTheme();
 
 export default function Perfil() {
-
-  const { id } = useParams();
-  const { user } = React.useContext(AuthContext);
-  const [isMyself,setIsMyself] = React.useState(true);
-
-  const [userData, setUserData] = React.useState(true)
-
   const navigate = useNavigate();
-  const [x, setUser] = React.useState(undefined);
-  const fetch = async () => {
-    let userData=undefined;
-    if (user.id === Number(id)) {
-      userData = await getUser(Number(id),true);
-      setIsMyself(true);
-    } else {
-      setIsMyself(false);
-      userData = await getUser(Number(id));
-    }
-    if (!userData) {
-      throw new Error("Nao foi possivel pegar dados antigos do usuario");
-    }
-    setUserData(userData);
-    } 
-  fetch();
-  console.log(userData)
+
+  const [userData, setUserData] = useState({
+    id: "",
+    name: "",
+    email: "",
+    interesses: "",
+    periodo: 0,
+    materias: "",
+  })
+
+  useEffect(() => {
+    setTimeout(() =>
+      LoginID().then(res => setUserData(res))
+      , 500)
+  }, [userData])
 
   const handleLogout = (jwtIsSet = true) => {
-      if (jwtIsSet)
-        LogoutSubmit()
-      setUser(undefined);
-      forgetUser()
-      navigate("/")
+    if (jwtIsSet)
+      LogoutSubmit()
+    forgetUser()
+    navigate("/")
       .catch((err) => alert(err.response))
   }
 
@@ -76,9 +67,9 @@ export default function Perfil() {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" >
-      <Grid container spacing={80}>
-      <Grid item xs={12} sm={6}>
-      <Button
+        <Grid container spacing={80}>
+          <Grid item xs={12} sm={6}>
+            <Button
               type="submit"
               fullWidth
               variant="contained"
@@ -86,72 +77,72 @@ export default function Perfil() {
             >
               Home
             </Button>
-      </Grid>
-      </Grid>
-      <Container maxWidth="lg">
-        <CssBaseline />
-        <Box
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            '& > :not(style)': {
-              m: 1,
-              width: "100%",
-              height: "200%",
-            },
-          }}
-        >
-        <Paper>
-            <Divider style={{
-              paddingLeft: 10,
-              paddingRight: 10,
-              backgroundColor: '#e0c4df',
+          </Grid>
+        </Grid>
+        <Container maxWidth="lg">
+          <CssBaseline />
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              '& > :not(style)': {
+                m: 1,
+                width: "100%",
+                height: "200%",
+              },
             }}
-            >
-              <PictureNameContainer>
+          >
+            <Paper>
+              <Divider style={{
+                paddingLeft: 10,
+                paddingRight: 10,
+                backgroundColor: '#e0c4df',
+              }}
+              >
+                <PictureNameContainer>
                   <AccountCircleIcon style={{
                     fontSize: 100,
                   }}>
                   </AccountCircleIcon>
                   <UserNameText>
-                  {userData.name}
-                </UserNameText>
-              </PictureNameContainer>
-              <DataContainer>
-                <DataAlign>
-                  <MailIcon />
-                  <Label> Email: </Label>
-                  <Value> {userData.email} </Value>
-                </DataAlign>
-                <DataAlign>
-                  <InterestsIcon />
-                  <Label> Interesses/Hobbies: </Label>
-                  <Value> {userData.interesses} </Value>
-                </DataAlign>
-                <DataAlign>
-                  <SchoolIcon />
-                  <Label> Período: </Label>
-                  <Value> {userData.periodo} </Value>
-                </DataAlign>
-                <DataAlign>
-                  <BookIcon />
-                  <Label> Matérias: </Label>
-                  <Value> {userData.materias} </Value>
-                </DataAlign>
-              </DataContainer>
+                    {userData.name}
+                  </UserNameText>
+                </PictureNameContainer>
+                <DataContainer>
+                  <DataAlign>
+                    <MailIcon />
+                    <Label> Email: </Label>
+                    <Value> {userData.email} </Value>
+                  </DataAlign>
+                  <DataAlign>
+                    <InterestsIcon />
+                    <Label> Interesses/Hobbies: </Label>
+                    <Value> {userData.interesses} </Value>
+                  </DataAlign>
+                  <DataAlign>
+                    <SchoolIcon />
+                    <Label> Período: </Label>
+                    <Value> {userData.periodo} </Value>
+                  </DataAlign>
+                  <DataAlign>
+                    <BookIcon />
+                    <Label> Matérias: </Label>
+                    <Value> {userData.materias} </Value>
+                  </DataAlign>
+                </DataContainer>
               </Divider>
               <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={() => handleLogout(true)}
-            >
-              Logout
-            </Button>
-          </Paper>
-        </Box>
-      </Container>
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={() => handleLogout(true)}
+              >
+                Logout
+              </Button>
+            </Paper>
+          </Box>
+        </Container>
       </Container>
     </ThemeProvider>
   );

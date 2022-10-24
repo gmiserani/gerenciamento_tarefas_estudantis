@@ -21,7 +21,6 @@ import {
   } from "./Styles"
 
 const theme = createTheme();
-
 export default function Listagem() {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -34,6 +33,7 @@ export default function Listagem() {
       materias: data.get('materias'),
     });
   };
+
 
   return (
     <ThemeProvider theme={theme}>

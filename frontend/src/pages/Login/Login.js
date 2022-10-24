@@ -11,8 +11,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { LoginSubmit } from '../../services/usercrud';
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { LoginID } from '../../services/usercrud';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -29,20 +30,23 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-  function SignIn (props) {
-    const navigate = useNavigate();
+function SignIn(props) {
+  const navigate = useNavigate();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        console.log({email, password})
-        LoginSubmit(email,password)
-        .then((res) => navigate("/perfil/"))
-        .catch((err) => alert(err.response))
-        // navigate("/dashboard")
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    try {
+      LoginSubmit(email, password)
+      navigate(`/perfil`)
+    } catch (err) {
+      console.log(err)
     }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -64,14 +68,14 @@ const theme = createTheme();
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
-               margin="normal"
-               required
-               fullWidth
-               className="input"
-               type="email"
-               placeholder="Email"
-               value={email}
-               onChange={(e) => setEmail(e.target.value)}
+              margin="normal"
+              required
+              fullWidth
+              className="input"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -93,7 +97,7 @@ const theme = createTheme();
               Entrar
             </Button>
             <Grid container>
-            
+
               <Grid item>
                 <Link href="./cadastro" variant="body2">
                   {"Não tem uma conta? Cadastre-se"}

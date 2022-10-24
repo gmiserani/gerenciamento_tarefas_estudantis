@@ -128,7 +128,17 @@ router.get('/logout', verifyJWT, (req, res, next) => {
     next(error);
   }
 });
-
+router.get('/me',
+  verifyJWT, 
+  async (req, res, next) =>{
+    try{
+      const user = await UserService.getUserById(req.user.id);
+      res.json(user).end()
+    } catch(error) {
+      next(error)
+    }
+  }
+  )
 router.delete('/delete/:id',
   verifyJWT, 
   async (req, res, next) => {

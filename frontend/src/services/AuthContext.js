@@ -10,23 +10,22 @@ import {
 } from './auth';
 
 
-
 const AuthContext = React.createContext({
   handleSignUp: () => { },
   fetchUserStorage: () => false,
   handleLogout: (jwtIsSet = true) => { },
   user: undefined,
+  userId: String,
 });
-
-
 
 
 
 function AuthProvider({ children }) {
 
   const [user, setUser] = React.useState(undefined);
+  const [userId, setUserId] = React.useState("");
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
 
   async function handleSignUp(event) {
@@ -93,7 +92,7 @@ function AuthProvider({ children }) {
   }
 
 
-  
+
 
   function fetchUserStorage() {
     const user = getUserStorage();
@@ -104,7 +103,7 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ handleSignUp, fetchUserStorage, handleLogout, user }}>
+    <AuthContext.Provider value={{ handleSignUp, fetchUserStorage, handleLogout, user, userId, setUserId }}>
       {children}
     </AuthContext.Provider>
   );
