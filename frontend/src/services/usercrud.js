@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import api from "./api";
 
-
 async function getAllUsers(){  
     const response = await api.get('//todosUsuarios')
     return response.data;   
@@ -9,6 +8,21 @@ async function getAllUsers(){
 
 async function LoginSubmit(email, password){
     await api.post('/users/login', {email, password})
+}
+
+async function LogoutSubmit(){
+  await api.get('/users/logout');
+}
+
+async function SignUpSubmit(newUserData){
+  const res = await api.post('/users/createUser',{
+    name: newUserData.get('firstName'),
+    email: newUserData.get('email'),
+    password: newUserData.get('password'),
+    interesses: newUserData.get('interesses'),
+    periodo: newUserData.get('periodo'),
+    materias: newUserData.get('materias'),
+  })
 }
 
 async function DeleteUser(id){
@@ -44,4 +58,4 @@ async function EditUser(id,nome,email){
 
 }
 
-export { getAllUsers, LoginSubmit, DeleteUser, EditUser }
+export { getAllUsers, LoginSubmit, DeleteUser, EditUser, SignUpSubmit}

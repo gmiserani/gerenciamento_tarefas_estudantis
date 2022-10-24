@@ -15,6 +15,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BookIcon from '@mui/icons-material/Book';
 import InterestsIcon from '@mui/icons-material/Interests';
 import SchoolIcon from '@mui/icons-material/School';
+import { LogoutSubmit } from '../../services/usercrud';
+
 
 import {
     DataContainer,
@@ -29,17 +31,17 @@ import {
 const theme = createTheme();
 
 export default function Perfil() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      interesses: data.get('interesses'),
-      password: data.get('password'),
-      periodo: data.get('periodo'),
-      materias: data.get('materias'),
-    });
-  };
+  const navigate = useNavigate();
+  const handleLogout = (jwtIsSet = true) => {
+      if (jwtIsSet)
+        LogoutSubmit()
+
+      setUser(undefined);
+      forgetUser();
+      navigate("/");
+
+    } 
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -82,29 +84,29 @@ export default function Perfil() {
                   }}>
                   </AccountCircleIcon>
                   <UserNameText>
-                  Isabella
+                  {userData.name}
                 </UserNameText>
               </PictureNameContainer>
               <DataContainer>
                 <DataAlign>
                   <MailIcon />
                   <Label> Email: </Label>
-                  <Value> oi </Value>
+                  <Value> {userData.email} </Value>
                 </DataAlign>
                 <DataAlign>
                   <InterestsIcon />
                   <Label> Interesses/Hobbies: </Label>
-                  <Value> oi </Value>
+                  <Value> {userData.interesses} </Value>
                 </DataAlign>
                 <DataAlign>
                   <SchoolIcon />
                   <Label> Período: </Label>
-                  <Value> oi </Value>
+                  <Value> {userData.periodo} </Value>
                 </DataAlign>
                 <DataAlign>
                   <BookIcon />
                   <Label> Matérias: </Label>
-                  <Value> oi </Value>
+                  <Value> {userData.materias} </Value>
                 </DataAlign>
               </DataContainer>
               </Divider>

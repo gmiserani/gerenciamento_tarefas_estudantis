@@ -10,6 +10,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+//import { SignUpSubmit } from '../../services/usercrud';
+//import { useAuth } from '../../services/AuthContext';
+import { SignUpSubmit } from '../../services/usercrud';
+import { useNavigate } from "react-router-dom";
+
+
+
 
 function Copyright(props) {
   return (
@@ -24,21 +31,23 @@ function Copyright(props) {
   );
 }
 
+
+
 const theme = createTheme();
 
-export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      interesses: data.get('interesses'),
-      password: data.get('password'),
-      periodo: data.get('periodo'),
-      materias: data.get('materias'),
-    });
-  };
 
+
+export default function SignUp() {
+  const navigate = useNavigate();
+  //const { handleSignUp } = useAuth();
+  //const auth = useAuth();
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    const newUserData = new FormData(event.currentTarget);
+    SignUpSubmit(newUserData)
+    .then((res) => navigate("/"))
+    .catch((err) => alert(err.response))
+    }
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -57,7 +66,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Cadastro
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleSignUp} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -133,7 +142,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="./login" variant="body2">
+                <Link href="/" variant="body2">
                   Já tem uma conta? Faça Login
                 </Link>
               </Grid>
