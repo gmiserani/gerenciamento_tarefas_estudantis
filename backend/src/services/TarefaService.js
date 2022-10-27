@@ -20,7 +20,7 @@ class tarefaService {
     }
 
     async getAllTarefas() {
-      const tarefas = await Tarefa.findAll({raw: true, attributes: ['id', 'name']});
+      const tarefas = await Tarefa.findAll({raw: true, attributes: ['id', 'name', 'deadline', 'subject', 'value', 'activity']});
       if (!tarefas) {
         throw new QueryError(`Nao foi encontrado nenhum projeto`);
       }

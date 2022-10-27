@@ -2,7 +2,6 @@ const { DataTypes } = require('sequelize');
 const database = require('../database/index');
 
 const User = require('./User');
-// const UserProject = require('./UserProject');
 
 const Tarefa = database.define('Tarefa', {
   id: {
@@ -18,7 +17,7 @@ const Tarefa = database.define('Tarefa', {
   },
 
   deadline: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 
