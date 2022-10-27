@@ -23,6 +23,9 @@ async function SignUpSubmit(newUserData) {
     materias: newUserData.get('materias'),
   })
 }
+async function TarefaSignUp(newProjectData) {
+  await api.post('/tarefa/createTarefa', newProjectData)
+}
 
 async function DeleteUser(id) {
   try {
@@ -73,5 +76,9 @@ async function LoginID() {
   const res = await api.get('users/me')
   return res.data
 }
+async function Tarefas() {
+  const res = await api.get('tarefa/getTarefas')
+  return res.data
+}
 
-export { getAllUsers, LoginSubmit, DeleteUser, EditUser, SignUpSubmit, getUser, LogoutSubmit, LoginID }
+export { getAllUsers, LoginSubmit, DeleteUser, EditUser, SignUpSubmit, getUser, LogoutSubmit, LoginID, Tarefas, TarefaSignUp }

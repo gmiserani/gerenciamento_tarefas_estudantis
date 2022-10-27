@@ -80,5 +80,5 @@ export const Label = styled('span')(({ theme }) => ({
   color: 'var(--app-laranja)',
 }));
 
-export const ContractCreateForm = styled('form') (({ theme }) => ({
+export const ProjectCreateForm = styled('form') (({ theme }) => ({
 }));

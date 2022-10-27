@@ -1,4 +1,5 @@
 import { styled } from '@mui/material/styles';
+import { DataGrid } from '@mui/x-data-grid';
 
 
 export const Divider = styled('div')(({ theme }) => ({
@@ -65,4 +66,12 @@ export const Label = styled('span')(({ theme }) => ({
   fontSize: 16,
   fontWeight: 500,
   color: 'var(--app-cinza)',
+}));
+
+export const ContractGrid = styled(DataGrid)(({ theme }) => ({
+  minHeight: 400,
+  marginTop: 50,
+  marginLeft: 25,
+  marginRight: 25,
+  // border: "none",
 }));

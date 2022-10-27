@@ -74,8 +74,9 @@ export default function Perfil() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={() => navigate("/listagem")}
             >
-              Home
+              Tarefas
             </Button>
           </Grid>
         </Grid>
