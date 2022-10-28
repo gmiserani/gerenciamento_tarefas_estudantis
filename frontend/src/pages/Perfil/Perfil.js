@@ -22,6 +22,9 @@ import {
 } from '../../services/auth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext, User } from '../../services/AuthContext';
+import ImagePickModal from '../../components/ImagePickModal/ImagePickModal';
+import DefaultUser from '../../assets/DefaultUser.png';
+import * as React from 'react';
 
 
 import {
@@ -32,6 +35,7 @@ import {
   Divider,
   PictureNameContainer,
   UserNameText,
+  Avatar
 } from "./Styles"
 import { useEffect } from 'react';
 
@@ -48,6 +52,16 @@ export default function Perfil() {
     periodo: 0,
     materias: "",
   })
+
+  const [imageUrl, setImageUrl] = React.useState('');
+
+  const [openImageUrlModal, setOpenImageUrlModal] = React.useState(false);
+  const handleOpenImageUrlModal = () => setOpenImageUrlModal(true);
+
+  const handleCloseImageUrlModal = (url) => {
+    setImageUrl(url);
+    setOpenImageUrlModal(false);
+  }
 
   useEffect(() => {
     setTimeout(() =>
@@ -73,7 +87,7 @@ export default function Perfil() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, bgcolor: '#D98695'  }}
               onClick={() => navigate("/listagem")}
             >
               Tarefas
@@ -97,14 +111,40 @@ export default function Perfil() {
               <Divider style={{
                 paddingLeft: 10,
                 paddingRight: 10,
-                backgroundColor: '#e0c4df',
+                backgroundColor: '#efc2c9',
               }}
               >
                 <PictureNameContainer>
-                  <AccountCircleIcon style={{
-                    fontSize: 100,
-                  }}>
-                  </AccountCircleIcon>
+                <Avatar src={imageUrl ? imageUrl : DefaultUser}
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null; // prevents looping
+                      setImageUrl("");
+                      currentTarget.src = DefaultUser;
+                    }}
+                    alt="foto de perfil"
+                  />
+                  <Button
+                    variant="outlined"
+                    style={{
+                      textTransform: 'none',
+                      width: '100%',
+                      fontWeight: 600,
+                      borderRadius: 10,
+                      height: 44,
+                      fontSize: 18,
+                      color: 'var(--app-rosa)',
+                      margin: 10,
+                      borderBlockColor: 'var(--app-rosa)',
+                      borderColor: 'var(--app-rosa)'
+                    }}
+                    onClick={handleOpenImageUrlModal}
+                  >Alterar foto</Button>
+                  <ImagePickModal
+                    title="Insira a URL da Imagem"
+                    content="CONTEUDO"
+                    openImageUrlModal={openImageUrlModal}
+                    handleCloseImageUrlModal={handleCloseImageUrlModal}
+                  />
                   <UserNameText>
                     {userData.name}
                   </UserNameText>
@@ -132,18 +172,19 @@ export default function Perfil() {
                   </DataAlign>
                 </DataContainer>
               </Divider>
-              <Button
+            </Paper>
+          </Box>
+          
+        </Container>
+        <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 5, mb: 0, bgcolor: '#D98695', width: 500 }}
                 onClick={() => handleLogout(true)}
               >
                 Logout
               </Button>
-            </Paper>
-          </Box>
-        </Container>
       </Container>
     </ThemeProvider>
   );

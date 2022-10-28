@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -6,7 +6,7 @@ import DatePicker from '@mui/lab/DatePicker';
 import ptBRLocale from 'date-fns/locale/pt-BR';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useNavigate } from 'react-router-dom';
-import { TarefaSignUp } from '../../services/usercrud';
+import { TarefaUpdate } from '../../services/usercrud';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Avatar from '@mui/material/Avatar';
@@ -15,8 +15,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import { getAllUsers, UserChip } from '../../services/usercrud';
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
-import { makeStyles } from "@mui/styles";
+import EditIcon from '@mui/icons-material/Edit';
 
 import {
   Divider,
@@ -39,37 +38,43 @@ import {
   Chip,
   MenuItem
 } from '@mui/material';
+import { getTarefa } from '../../services/tarefacrud';
 
 const theme = createTheme();
 
-// const useStyles = makeStyles((theme) => ({
-//   textfield_input: {
-//       color: `#c5cae9 !important`,
-//   }
-// }));
 
-
-export default function ProjectRegister() {
+export default function ProjectUpdate() {
   const navigate = useNavigate();
 
-  const handleProjectCreate = (event) => {
+  const queryString = window.location.pathname;
+  const ids = queryString.substring(queryString.lastIndexOf('/') + 1);
+  const id = parseInt(ids)
+
+  const [tarefaData, setTarefaData] = useState({
+    name: "",
+    deadline: "",
+    subject: "",
+    value: "",
+    activity: ""
+  })
+
+  useEffect(() => {
+    setTimeout(() =>
+      getTarefa(id).then(res => setTarefaData(res))
+      , 500)
+  }, [])
+
+  const handleProjectUpdate = (event) => {
     event.preventDefault();
-
-    const newProjectData = new FormData(event.currentTarget);
-
-    const body = {
-      name: newProjectData.get("name"),
-      deadline: newProjectData.get("deadline"),
-      subject: newProjectData.get("subject"),
-      value: newProjectData.get("value"),
-      activity: newProjectData.get("activity"),
-    }
-
-    TarefaSignUp(body).then((res) => navigate("/listagem"))
+    console.log(tarefaData)
+    TarefaUpdate(tarefaData, id).then((res) => navigate("/listagem"))
       .catch((err) => console.log(err.response))
   }
 
-  //const classes = useStyles();
+  function updateTarefaData(newTarefaData) {
+    if (!tarefaData) return;
+    setTarefaData({ ...tarefaData, ...newTarefaData });
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -77,79 +82,81 @@ export default function ProjectRegister() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 7,
+            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            marginBottom: 8,
+            marginBottom: 6
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: '#D98695' }}>
-            <TaskAltIcon />
+            <EditIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Nova Tarefa
+            Editar
           </Typography>
-          <Box component="form" noValidate onSubmit={handleProjectCreate} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleProjectUpdate} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
                   name="name"
-                  required
                   fullWidth
                   id="firstName"
-                  label="Nome da Tarefa"
+                  label="Atividade"
                   autoFocus
-                  color="purple"
-                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
-                  //color='#ffcdd4'
-                  //inputProps={{className: classes.textfield_input}}
-                  //color='#ffcdd4'
+                  sx={{ borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
+                  value={tarefaData.name}
+                  onChange={(e) => updateTarefaData({ name: e.target.value })}
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
                   id="deadline"
                   label="Prazo de Entrega"
                   name="deadline"
                   autoComplete="deadline"
-                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
+                  sx={{ borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
+                  value={tarefaData.deadline}
+                  onChange={(e) => updateTarefaData({ deadline: e.target.value })}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
                   id="subject"
                   label="Matéria"
                   name="subject"
                   autoComplete="subject"
-                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
+                  sx={{ borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
+                  value={tarefaData.subject}
+                  onChange={(e) => updateTarefaData({ subject: e.target.value })}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
                   id="value"
                   label="Pontuação"
                   name="value"
                   autoComplete="value"
-                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
+                  sx={{ borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
+                  value={tarefaData.value}
+                  onChange={(e) => updateTarefaData({ value: e.target.value })}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
                   id="activity"
                   label="Tipo de Atividade"
                   name="activity"
                   autoComplete="activity"
-                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
+                  sx={{ borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
+                  value={tarefaData.activity}
+                  onChange={(e) => updateTarefaData({ activity: e.target.value })}
                 />
               </Grid>
             </Grid>
@@ -159,11 +166,11 @@ export default function ProjectRegister() {
               variant="contained"
               sx={{ mt: 3, mb: 2, bgcolor: '#D98695', fontColor: '#000000' }}
             >
-              Cadastre
+              Salvar Alterações
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/listagem" variant="h7" color= "#000000">
+                <Link href="/listagem" variant="h7" color="#000000">
                   Voltar para a Listagem
                 </Link>
               </Grid>
