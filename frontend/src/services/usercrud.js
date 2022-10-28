@@ -27,9 +27,13 @@ async function TarefaSignUp(newProjectData) {
   await api.post('/tarefa/createTarefa', newProjectData)
 }
 
+async function TarefaUpdate(newProjectData, id) {
+  await api.put(`/tarefa/update/${id}`, newProjectData)
+}
+
 async function DeleteUser(id) {
   try {
-    await api.delete(`/api/usuario/${id}`);
+    await api.delete(`/users/delete/${id}`);
     console.log(`Usuario ${id} deletado com sucesso.`);
   } catch (error) {
     console.log(error.response);
@@ -81,4 +85,4 @@ async function Tarefas() {
   return res.data
 }
 
-export { getAllUsers, LoginSubmit, DeleteUser, EditUser, SignUpSubmit, getUser, LogoutSubmit, LoginID, Tarefas, TarefaSignUp }
+export { getAllUsers, LoginSubmit, DeleteUser, EditUser, SignUpSubmit, getUser, LogoutSubmit, LoginID, Tarefas, TarefaSignUp, TarefaUpdate }
