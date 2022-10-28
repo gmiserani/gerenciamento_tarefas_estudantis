@@ -19,6 +19,7 @@ import { useAuth } from '../../services/AuthContext';
 import { ContractGrid } from './Styles';
 import { useState } from "react";
 import { Tarefas } from '../../services/usercrud';
+import ConfirmDeleteModal from '../../components/ImagePickModal/ConfirmDelete/ConfirmDeleteModel';
 
 import {
   DataContainer,
@@ -32,28 +33,38 @@ const theme = createTheme();
 
 const memberAdminColumns = [
   {
-    field: 'name', headerName: 'Nome', minWidth: 600, headerClassName: 'contract-grid--header'
+    field: 'name', headerName: 'Atividade', minWidth: 250, headerClassName: 'contract-grid--header'
     , renderCell: (params) => <ProjectViewLink params={params} />
   },
   {
-    field: 'deadline', headerName: 'Data', minWidth: 600, headerClassName: 'contract-grid--header'
+    field: 'deadline', headerName: 'Prazo de Entrega', minWidth: 250, headerClassName: 'contract-grid--header'
     , renderCell: (params) => <ProjectViewLink params={params} />
   },
   {
-    field: 'subject', headerName: 'Materia', minWidth: 600, headerClassName: 'contract-grid--header'
+    field: 'subject', headerName: 'Matéria', minWidth: 200, headerClassName: 'contract-grid--header'
     , renderCell: (params) => <ProjectViewLink params={params} />
   },
   {
-    field: 'value', headerName: 'valor', minWidth: 600, headerClassName: 'contract-grid--header'
+    field: 'value', headerName: 'Pontuação', minWidth: 150, headerClassName: 'contract-grid--header'
     , renderCell: (params) => <ProjectViewLink params={params} />
   },
   {
-    field: 'activity', headerName: 'atividade', minWidth: 600, headerClassName: 'contract-grid--header'
+    field: 'activity', headerName: 'Tipo de Atividade', minWidth: 200, headerClassName: 'contract-grid--header'
     , renderCell: (params) => <ProjectViewLink params={params} />
+  },
+  {
+    field: 'id', headerName: 'Editar', minWidth: 100, headerClassName: 'contract-grid--header'
+    , renderCell: (params) => <Options params={params} />
+  },
+  {
+    field: 'delete', headerName: 'Deletar', minWidth: 100, headerClassName: 'contract-grid--header'
+    , renderCell: (params) => <Deletar params={params} />
   },
 ];
 
 function ProjectViewLink({ params }) {
+  
+
   return (
     <div>
       {params.value}
@@ -61,6 +72,29 @@ function ProjectViewLink({ params }) {
   )
 }
 
+function Options({params}) {
+  const navigate = useNavigate();
+  return(
+  <div>
+  <EditIcon onClick={() => navigate(`/edittarefa/${params.id}`)} style={{ color: 'var(--app-laranja)', cursor:"pointer" }} />
+  </div>
+  )
+}
+
+function Deletar ({params}) {
+  const navigate = useNavigate();
+  
+  return(
+    <div>
+      <ConfirmDeleteModal
+        title="Excluir Tarefa"
+        content={"Tem certeza que deseja excluir a tarefa?"}
+        id={params.id}
+        target="Project"
+      />
+    </div>
+  )
+}
 export default function Listagem({ }) {
   const navigate = useNavigate();
   const [pageSize, setPageSize] = useState(10);
@@ -100,7 +134,7 @@ export default function Listagem({ }) {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, bgcolor: '#D98695' }}
               onClick={() => navigate("/perfil")}
             >
               Visualizar Perfil
@@ -111,7 +145,7 @@ export default function Listagem({ }) {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, bgcolor: '#D98695'}}
               onClick={() => navigate("/novatarefa")}
             >
               Adicionar Tarefa
@@ -125,8 +159,10 @@ export default function Listagem({ }) {
             sx={{
               width: '100%',
               borderRadius: "10px",
+              bgcolor: '#efc2c9',
+              borderColor: "#D98695",
               '& .user-grid--header': {
-                color: 'var(--app-laranja)',
+                bgcolor: '#efc2c9',
               },
             }}
 
@@ -135,7 +171,9 @@ export default function Listagem({ }) {
               container
               style={{
                 height: "100%",
-                paddingBottom: 30
+                paddingBottom: 30,
+                bgcolor: '#efc2c9',
+                scrollbarColor: '#000000',
               }}
             >
               <ContractGrid
