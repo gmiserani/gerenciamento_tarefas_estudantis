@@ -54,13 +54,14 @@ export default function SignUp() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 7,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            marginBottom: 6,
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: '#D98695' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -76,7 +77,9 @@ export default function SignUp() {
                   fullWidth
                   id="firstName"
                   label="Nome"
+                  color="secondary"
                   autoFocus
+                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
         
@@ -88,6 +91,8 @@ export default function SignUp() {
                   label="Endereço de Email"
                   name="email"
                   autoComplete="email"
+                  color="secondary"
+                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -99,6 +104,8 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  color="secondary"
+                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -109,6 +116,8 @@ export default function SignUp() {
                   label="Interesses/Hobbies"
                   name="interesses"
                   autoComplete="interesses"
+                  color="secondary"
+                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -119,6 +128,8 @@ export default function SignUp() {
                   label="Período"
                   name="periodo"
                   autoComplete="periodo"
+                  color="secondary"
+                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -129,6 +140,8 @@ export default function SignUp() {
                   label="Matérias"
                   name="materias"
                   autoComplete="materias"
+                  color="secondary"
+                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
             </Grid>
@@ -136,20 +149,21 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              color="secondary"
+              sx={{ mt: 3, mb: 2, bgcolor: '#D98695' }}
             >
               Cadastre
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/" variant="body2">
+                <Link href="/" variant="body2"  color= "#000000">
                   Já tem uma conta? Faça Login
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        
       </Container>
     </ThemeProvider>
   );

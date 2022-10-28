@@ -105,6 +105,7 @@ export default function ProjectUpdate() {
                   id="firstName"
                   label="Atividade"
                   autoFocus
+                  color="secondary"
                   sx={{ borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                   value={tarefaData.name}
                   onChange={(e) => updateTarefaData({ name: e.target.value })}
@@ -118,6 +119,7 @@ export default function ProjectUpdate() {
                   label="Prazo de Entrega"
                   name="deadline"
                   autoComplete="deadline"
+                  color="secondary"
                   sx={{ borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                   value={tarefaData.deadline}
                   onChange={(e) => updateTarefaData({ deadline: e.target.value })}
@@ -130,6 +132,7 @@ export default function ProjectUpdate() {
                   label="Matéria"
                   name="subject"
                   autoComplete="subject"
+                  color="secondary"
                   sx={{ borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                   value={tarefaData.subject}
                   onChange={(e) => updateTarefaData({ subject: e.target.value })}
@@ -142,6 +145,7 @@ export default function ProjectUpdate() {
                   label="Pontuação"
                   name="value"
                   autoComplete="value"
+                  color="secondary"
                   sx={{ borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                   value={tarefaData.value}
                   onChange={(e) => updateTarefaData({ value: e.target.value })}
@@ -154,6 +158,7 @@ export default function ProjectUpdate() {
                   label="Tipo de Atividade"
                   name="activity"
                   autoComplete="activity"
+                  color="secondary"
                   sx={{ borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                   value={tarefaData.activity}
                   onChange={(e) => updateTarefaData({ activity: e.target.value })}
@@ -164,6 +169,7 @@ export default function ProjectUpdate() {
               type="submit"
               fullWidth
               variant="contained"
+              color="secondary"
               sx={{ mt: 3, mb: 2, bgcolor: '#D98695', fontColor: '#000000' }}
             >
               Salvar Alterações

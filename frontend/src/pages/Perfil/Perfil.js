@@ -89,6 +89,7 @@ export default function Perfil() {
               variant="contained"
               sx={{ mt: 3, mb: 2, bgcolor: '#D98695'  }}
               onClick={() => navigate("/listagem")}
+              color="secondary"
             >
               Tarefas
             </Button>
@@ -182,6 +183,7 @@ export default function Perfil() {
                 variant="contained"
                 sx={{ mt: 5, mb: 0, bgcolor: '#D98695', width: 500 }}
                 onClick={() => handleLogout(true)}
+                color="secondary"
               >
                 Logout
               </Button>

@@ -17,6 +17,7 @@ import Link from '@mui/material/Link';
 import { getAllUsers, UserChip } from '../../services/usercrud';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { makeStyles } from "@mui/styles";
+import { pink } from '@mui/material/colors'
 
 import {
   Divider,
@@ -101,7 +102,7 @@ export default function ProjectRegister() {
                   id="firstName"
                   label="Nome da Tarefa"
                   autoFocus
-                  color="purple"
+                  color="secondary"
                   sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                   //color='#ffcdd4'
                   //inputProps={{className: classes.textfield_input}}
@@ -116,6 +117,7 @@ export default function ProjectRegister() {
                   label="Prazo de Entrega"
                   name="deadline"
                   autoComplete="deadline"
+                  color="secondary"
                   sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
@@ -127,6 +129,7 @@ export default function ProjectRegister() {
                   label="Matéria"
                   name="subject"
                   autoComplete="subject"
+                  color="secondary"
                   sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
@@ -138,6 +141,7 @@ export default function ProjectRegister() {
                   label="Pontuação"
                   name="value"
                   autoComplete="value"
+                  color="secondary"
                   sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
@@ -149,6 +153,7 @@ export default function ProjectRegister() {
                   label="Tipo de Atividade"
                   name="activity"
                   autoComplete="activity"
+                  color="secondary"
                   sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
@@ -157,9 +162,10 @@ export default function ProjectRegister() {
               type="submit"
               fullWidth
               variant="contained"
+              color="secondary"
               sx={{ mt: 3, mb: 2, bgcolor: '#D98695', fontColor: '#000000' }}
             >
-              Cadastre
+              Adicionar
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

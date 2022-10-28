@@ -134,6 +134,7 @@ export default function Listagem({ }) {
               type="submit"
               fullWidth
               variant="contained"
+              color="secondary"
               sx={{ mt: 3, mb: 2, bgcolor: '#D98695' }}
               onClick={() => navigate("/perfil")}
             >
@@ -145,6 +146,7 @@ export default function Listagem({ }) {
               type="submit"
               fullWidth
               variant="contained"
+              color="secondary"
               sx={{ mt: 3, mb: 2, bgcolor: '#D98695'}}
               onClick={() => navigate("/novatarefa")}
             >

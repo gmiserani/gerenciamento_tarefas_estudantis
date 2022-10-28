@@ -12,6 +12,8 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ComputerIcon from '@mui/icons-material/Computer';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -29,6 +31,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -48,7 +51,7 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://images3.alphacoders.com/103/1034504.jpg)',
+            backgroundImage: 'url(https://wallpapers.com/images/hd/study-table-soft-aesthetic-iwuk4cee6vxijmku.jpg)',
             //backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -66,8 +69,8 @@ export default function SignInSide() {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
+            <Avatar sx={{ m: 1, bgcolor: '#D98695' }}>
+              <ComputerIcon />
             </Avatar>
             <Typography component="h1" variant="h7">
               Gerenciamento de Tarefas Estudantis
@@ -79,7 +82,7 @@ export default function SignInSide() {
             <Typography component="h1" variant="h7">
               
             </Typography>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h6" sx={{ color : '#D98695' }}>
             Faça login e comece a estruturar seu planejamento o quanto antes!
             </Typography>
               
@@ -87,9 +90,11 @@ export default function SignInSide() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, bgcolor: '#D98695'}}
+                color="secondary"
+                onClick={() => navigate("/")}
               >
-                Sign In
+                Faça Login
               </Button>
               <Grid container>
                 <Grid item xs>

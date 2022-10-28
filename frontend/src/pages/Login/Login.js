@@ -14,6 +14,7 @@ import { LoginSubmit } from '../../services/usercrud';
 import { LoginID } from '../../services/usercrud';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LoginIcon from '@mui/icons-material/Login';
 
 function Copyright(props) {
   return (
@@ -60,8 +61,8 @@ function SignIn(props) {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, bgcolor: '#D98695' }}>
+            <LoginIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Login
@@ -75,6 +76,8 @@ function SignIn(props) {
               type="email"
               placeholder="Email"
               value={email}
+              color="secondary"
+              sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
               onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
@@ -85,13 +88,16 @@ function SignIn(props) {
               type="password"
               placeholder="Senha"
               value={password}
+              color="secondary"
+              sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
               onChange={(e) => setPassword(e.target.value)}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              color="secondary"
+              sx={{ mt: 3, mb: 2, bgcolor: '#D98695' }}
               onClick={handleSubmit}
             >
               Entrar
@@ -99,14 +105,14 @@ function SignIn(props) {
             <Grid container>
 
               <Grid item>
-                <Link href="./cadastro" variant="body2">
+                <Link href="./cadastro" variant="body2" color= "#000000">
                   {"Não tem uma conta? Cadastre-se"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+       
       </Container>
     </ThemeProvider>
   );
