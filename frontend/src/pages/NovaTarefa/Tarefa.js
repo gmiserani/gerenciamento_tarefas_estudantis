@@ -15,7 +15,8 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import { getAllUsers, UserChip } from '../../services/usercrud';
-
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import { makeStyles } from "@mui/styles";
 
 import {
   Divider,
@@ -41,6 +42,12 @@ import {
 
 const theme = createTheme();
 
+// const useStyles = makeStyles((theme) => ({
+//   textfield_input: {
+//       color: `#c5cae9 !important`,
+//   }
+// }));
+
 
 export default function ProjectRegister() {
   const navigate = useNavigate();
@@ -62,23 +69,26 @@ export default function ProjectRegister() {
       .catch((err) => console.log(err.response))
   }
 
+  //const classes = useStyles();
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 7,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            marginBottom: 8,
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, bgcolor: '#D98695' }}>
+            <TaskAltIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Registro
+            Nova Tarefa
           </Typography>
           <Box component="form" noValidate onSubmit={handleProjectCreate} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -89,19 +99,24 @@ export default function ProjectRegister() {
                   required
                   fullWidth
                   id="firstName"
-                  label="Nome"
+                  label="Nome da Tarefa"
                   autoFocus
+                  color="purple"
+                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
+                  //color='#ffcdd4'
+                  //inputProps={{className: classes.textfield_input}}
+                  //color='#ffcdd4'
                 />
               </Grid>
-
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
                   id="deadline"
-                  label="data"
+                  label="Prazo de Entrega"
                   name="deadline"
                   autoComplete="deadline"
+                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -109,9 +124,10 @@ export default function ProjectRegister() {
                   required
                   fullWidth
                   id="subject"
-                  label="materia"
+                  label="Matéria"
                   name="subject"
                   autoComplete="subject"
+                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -119,9 +135,10 @@ export default function ProjectRegister() {
                   required
                   fullWidth
                   id="value"
-                  label="valor"
+                  label="Pontuação"
                   name="value"
                   autoComplete="value"
+                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -129,9 +146,10 @@ export default function ProjectRegister() {
                   required
                   fullWidth
                   id="activity"
-                  label="tipo de atividade"
+                  label="Tipo de Atividade"
                   name="activity"
                   autoComplete="activity"
+                  sx={{borderColor: '#ffcdd4', bgcolor: '#efc2c9' }}
                 />
               </Grid>
             </Grid>
@@ -139,14 +157,14 @@ export default function ProjectRegister() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, bgcolor: '#D98695', fontColor: '#000000' }}
             >
-              Registre
+              Cadastre
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/listagem" variant="body2">
-                  voltar para listagem
+                <Link href="/listagem" variant="h7" color= "#000000">
+                  Voltar para a Listagem
                 </Link>
               </Grid>
             </Grid>
